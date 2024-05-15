@@ -25,7 +25,7 @@
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Options</span>
         </li>
-        <li class="nav-item">
+     {{--   <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                 <span class="menu-title">Transactions</span>
@@ -44,17 +44,17 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li>--}}
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('users') }}">
-                <i class="mdi mdi-contacts menu-icon"></i>
-                <span class="menu-title">Users</span>
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                <span class="menu-title">Contact</span>
+            <a class="nav-link" href="/profile">
+                <i class="mdi mdi-contacts menu-icon"></i>
+                <span class="menu-title">Profile</span>
             </a>
         </li>
 
