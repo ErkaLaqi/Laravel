@@ -5,14 +5,13 @@
                 {{ __('Profile Information') }}
             </h2>
 
-            <p class="card-subtitle">
-                {{ __("Update your account's profile information.") }}
+            <p class="mt-1 text-sm text-gray-600">
+                {{ __("Update your account's profile information and email address.") }}
             </p>
         </div>
 
-
         <div class="card-body">
-            <form id="send-verification" method="post" action="{{ route('verification.send') }}" enctype="multipart/form-data">
+            <form id="send-verification" method="post" action="{{ route('verification.send') }}">
                 @csrf
             </form>
 
@@ -22,23 +21,25 @@
 
                 <div class="form-group">
                     <label for="name" class="form-label">{{__('Name')}}</label>
-                    <input id="name" name="name" type="text" class="form-control" value="{{old('name',$user->name)}}" autocomplete="current-name">
+                    <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" autocomplete="current-name">
                     @error('name')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="lastname" class="form-label">{{__('Last Name')}}</label>
-                    <input id="lastname" name="lastname" type="text" class="form-control" value="{{old('lastname',$user->lastname)}}" autocomplete="current-last_name" >
+                    <input id="lastname" name="lastname" type="text" class="form-control" value="{{ old('lastname', $user->lastname) }}" autocomplete="current-last_name">
                     @error('lastname')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="email" class="form-label">{{__('Email')}}</label>
-                    <input id="email" name="email" type="text" class="form-control" value="{{old('email',$user->email)}}" autocomplete="current-email">
+                    <input id="email" name="email" type="text" class="form-control" value="{{ old('email', $user->email) }}" autocomplete="current-email">
                     @error('email')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
 
                     @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -60,31 +61,34 @@
                         </div>
                     @endif
                 </div>
+
                 <div class="form-group">
                     <label for="username" class="form-label">{{__('Username')}}</label>
-                    <input id="username" name="username" type="text" class="form-control" value="{{old('username',$user->username)}}" autocomplete="current-username">
+                    <input id="username" name="username" type="text" class="form-control" value="{{ old('username', $user->username) }}" autocomplete="current-username">
                     @error('username')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="birthday" class="form-label">{{__('Birthday')}}</label>
-                    <input id="birthday" name="birthday" type="date" class="datepicker form-control"  value="{{old('birthday',$user->birthday)}}" autocomplete="current-birthday">
+                    <input id="birthday" name="birthday" type="date" class="datepicker form-control" value="{{ old('birthday', $user->birthday) }}" autocomplete="current-birthday">
                     @error('birthday')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="photo" class="">{{__('Update Profile Photo')}}</label>
                     <br>
                     <input id="photo" name="photo" type="file" class="">
                     @error('photo')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary ">{{__('Save Changes')}}</button>
+                    <button type="submit" class="btn btn-primary">{{__('Save Changes')}}</button>
 
                     @if (session('status') === 'profile-updated')
                         <script>
@@ -98,14 +102,8 @@
                             });
                         </script>
                     @endif
-
-
                 </div>
-
-
             </form>
-
         </div>
     </div>
-
 </section>
