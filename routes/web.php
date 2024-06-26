@@ -2,30 +2,26 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+use App\Http\Controllers\UsersController;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('users', [UsersController::class, 'index'])->name('users.index');
+    Route::post('users', [UsersController::class, 'store'])->name('users.store');
+    Route::get('users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::delete('users/delete/{id}', [UsersController::class, 'destroy'])->name('users.delete');
+});
 
-
-
-Route::get('/users', function () {
-    return view('users');
-})->middleware(['auth', 'verified'])->name('users');
-
-
+Route::resource('users', UsersController::class)->middleware(['auth', 'verified'])
+    ->only('index', 'store', 'update', 'destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+})->name('profile');
 
 require __DIR__.'/auth.php';
-/*Route::resource('profile',\App\Http\Controllers\ProfileController::class);*/
-Route::resource('purchases',\App\Http\Controllers\PurchaseController::class);

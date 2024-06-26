@@ -1,4 +1,57 @@
 <section class="space-y-6">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            max-width: 400px;
+            max-height: 400px;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .modal h2 {
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .modal input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .modal button {
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal .secondary-button {
+            background-color: #edf2f7;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+            margin-right: 10px;
+        }
+
+        .modal .btn-danger {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+        }
+    </style>
+
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Delete Account') }}
@@ -9,12 +62,9 @@
         </p>
     </header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    <button type="button" onclick="openDeleteModal()" class="btn btn-danger">{{__('Delete Account')}}</button>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+    <div id="delete-account-modal" class="modal" style="display: none;">
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
             @method('delete')
@@ -28,28 +78,27 @@
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
-
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="password" name="password" type="password" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                @error('password')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
             </div>
-
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
+            <br>
+            <div class="mt-6 flex justify-end d-flex">
+                <button type="button" onclick="closeDeleteModal()" class=" btn secondary-button ms-3">{{ __('Cancel') }}</button>
+                <button type="submit" class="btn btn-danger ms-3">{{ __('Delete Account') }}</button>
             </div>
         </form>
-    </x-modal>
+    </div>
 </section>
+
+<script>
+    function openDeleteModal() {
+        document.getElementById('delete-account-modal').style.display = 'block';
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('delete-account-modal').style.display = 'none';
+    }
+</script>

@@ -1,10 +1,14 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Plus Admin</title>
+
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('assets_pluginAdmin/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets_pluginAdmin/vendors/flag-icon-css/css/flag-icon.min.css')}}">
@@ -22,6 +26,8 @@
 
     <!-- End layout styles -->
     <link rel="shortcut" href="{{asset('assets_pluginAdmin/images/favicon.png')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
+    @yield('datatable-css')
 </head>
 <body>
 <div class="container-scroller">
@@ -39,38 +45,39 @@
     <!-- partial -->
 
     <div class="main-panel">
-        <div class="content-wrapper pb-0">
-            <div class="page-header flex-wrap">
+        <div class="content-wrapper">
+            <div class="page-header ">
+
                 <div class="header-left">
-                    {{--<button class="btn btn-primary mb-2 mb-md-0 mr-2"> Create new document </button>
+                    <p> </p>
+                   {{-- <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Create new document </button>
                     <button class="btn btn-outline-primary bg-white mb-2 mb-md-0"> Import documents </button>--}}
                 </div>
-                <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                    <div class="d-flex align-items-center">
-                        <a href="#">
-                            <p class="m-0 pr-3">Profile</p>
-                        </a>
-                        <a class="pl-3 mr-4" href="#">
-                            <p class="m-0">{{ \Illuminate\Support\Facades\Auth::user()->username }}</p>
-                        </a>
-                    </div>
+
+<div class="justify-content-between align-items-baseline"> <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ \Illuminate\Support\Facades\Auth::user()->username }} </li>
+        </ol>
+    </nav> </div>
+
 
                     {{-- <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
                          <i class="mdi mdi-plus-circle"></i> Add Prodcut </button>--}}
                 </div>
-            </div>
+
 
             {{--@include('layouts.dashboard')--}}
             @yield('content')
-
+          </div>
 
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        @include('layouts.partial.footer')
+
         <!-- partial -->
     </div>
-
+@include('layouts.partial.footer')
 
 
 
@@ -100,11 +107,10 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="{{asset('assets_pluginAdmin/js/dashboard.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
 <!-- End custom js for this page -->
-<script>
-    $(function () {
-        $(".datepicker").datepicker();
-    });
-</script>
+
+
+@yield('datatable-scripts')
 </body>
 </html>
