@@ -37,12 +37,6 @@
         @endif
 
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard') }}">
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                <span class="menu-title">Dashboard</span>
-            </a>
-        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/profile">
