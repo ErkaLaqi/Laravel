@@ -4,7 +4,7 @@
             <span class="mdi mdi-chevron-double-left"></span>
         </button>
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('assets_pluginAdmin/images/logo-mini.svg')}}" alt="logo" /></a>
+
         </div>
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -115,7 +115,7 @@
                 </div>
             </li>
             <li class="nav-item nav-logout d-none d-lg-block">
-                <a class="nav-link" href="{{route('dashboard')}}">
+                <a class="nav-link" href="{{url("/users")}}">
                     <i class="mdi mdi-home-circle"></i>
                 </a>
             </li>

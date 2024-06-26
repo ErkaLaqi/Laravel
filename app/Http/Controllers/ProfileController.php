@@ -26,6 +26,24 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+/*dd($request->photo);*/
+        // Check if a file was uploaded
+        if ($request->hasFile('photo')) {
+            // Move the uploaded file to a directory
+            $photoName = $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('profile_photos'), $photoName);
+
+            // Save the file name to the user's profile
+            $user = $request->user();
+            $user->photo = $photoName;
+            $user->save();
+
+            // Optionally, you can store the file path in the database instead of just the file name
+            // $user->photo_path = 'profile-photos/' . $photoName;
+            // $user->save();
+        }
+
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {

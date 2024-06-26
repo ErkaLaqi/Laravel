@@ -17,12 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table='users';
+    protected $primaryKey='id';
+
     protected $fillable = [
         'name',
         'lastname',
         'username',
         'email',
         'birthday',
+        'role',
         'password',
     ];
 
@@ -50,13 +54,5 @@ class User extends Authenticatable
     }
 
 
-   /* public function setBirthdayAttribute($value)
-    {
-        $this->attributes['birthday'] = Carbon::createFromFormat('m/d/y', $value)->format('Y-m-d');
-    }
 
-    public function getBirthdayAttribute($value)
-    {
-       return Carbon::createFromFormat('Y-m-d', $this->attributes['birthday'])->format('m/d/y');
-    }*/
 }
